@@ -23,7 +23,7 @@ Este projeto tem como objetivo criar uma API para gerenciar uma lista de itens. 
 ## Como Executar
 1. Clone o repositório do projeto:
    ```
-   git clone https://github.com/seu-usuario/projeto-lista-itens.git
+   git clone https://github.com/GabrielTrindade20/api-shopping-list
    ```
 2. Abra o projeto em sua IDE de preferência.
 3. Configure a conexão com o banco de dados no arquivo `application.properties`.
@@ -34,10 +34,10 @@ Este projeto tem como objetivo criar uma API para gerenciar uma lista de itens. 
 5. A API estará disponível em `http://localhost:8080/api/items`.
 
 ## Endpoints da API
-- `POST /api/items`: Cria um novo item
-- `GET /api/items`: Retorna a lista de todos os itens
-- `PUT /api/items/{id}`: Atualiza um item existente
-- `DELETE /api/items/{id}`: Exclui um item
+- `POST /create`: Cria um novo item
+- `GET /getAllItems`: Retorna a lista de todos os itens
+- `PUT /update/{id}`: Atualiza um item existente
+- `DELETE /delete/{id}`: Exclui um item
 
 ## Exemplo de Uso
 Aqui está um exemplo de como enviar uma requisição para criar um novo item usando o Postman:
