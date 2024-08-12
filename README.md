@@ -1,58 +1,59 @@
-# API de Lista de Compras
+# Projeto de Lista de Itens
 
-Este é um projeto de um aplicativo de lista de compras simples, desenvolvido em Java. O objetivo deste projeto é aprender conceitos básicos de programação, como entrada de dados, manipulação de strings e CRUD (Create, Read, Update, Delete).
+## Visão Geral
+Este projeto tem como objetivo criar uma API para gerenciar uma lista de itens. Ela permite a realização de operações básicas de criação, leitura, atualização e exclusão (CRUD) de itens.
 
 ## Funcionalidades
+- Criação de novos itens
+- Listagem de todos os itens
+- Atualização de itens existentes
+- Exclusão de itens
 
-- Adicionar itens à lista de compras
-- Editar itens da lista de compras
-- Excluir itens da lista de compras
-- Visualizar a lista de compras
+## Requisitos
+- Java 11 ou superior
+- Banco de dados relacional (por exemplo, PostgreSQL, MySQL)
+- Maven para gerenciamento de dependências
 
-## Pré-requisitos
+## Tecnologias Utilizadas
+- Spring Boot
+- Spring Data JPA
+- Jackson (para serialização JSON)
+- Banco de dados relacional
 
-- Java Development Kit (JDK) instalado em sua máquina
-- IDE de sua preferência (como IntelliJ IDEA, Eclipse ou NetBeans)
-
-## Como executar o projeto
-
-1. Clone o repositório em sua máquina local:
-
+## Como Executar
+1. Clone o repositório do projeto:
    ```
-   git clone https://github.com/GabrielTrindade20/api-shopping-list.git
+   git clone https://github.com/seu-usuario/projeto-lista-itens.git
    ```
+2. Abra o projeto em sua IDE de preferência.
+3. Configure a conexão com o banco de dados no arquivo `application.properties`.
+4. Execute o projeto usando o comando:
+   ```
+   mvn spring-boot:run
+   ```
+5. A API estará disponível em `http://localhost:8080/api/items`.
 
-2. Abra o projeto em sua IDE preferida.
+## Endpoints da API
+- `POST /api/items`: Cria um novo item
+- `GET /api/items`: Retorna a lista de todos os itens
+- `PUT /api/items/{id}`: Atualiza um item existente
+- `DELETE /api/items/{id}`: Exclui um item
 
-3. Compile e execute a classe principal do projeto.
+## Exemplo de Uso
+Aqui está um exemplo de como enviar uma requisição para criar um novo item usando o Postman:
 
-4. Interaja com o aplicativo de lista de compras através do console.
+![Exemplo de Criação de Item no Postman][]
 
-## Estrutura do Projeto
-
-O projeto será organizado da seguinte forma:
-
+A resposta da API será um JSON com o item criado:```json
+{
+  "id": 1,
+  "item": "Novo Item"
+}
 ```
-aplicativo-lista-compras/
-├── src/
-│   └── main/
-│       └── java/
-│           └── com/
-│               └── api/
-│                   └── ShoppingList.java
-└── README.md
-```
-
-A classe `ShoppingList.java` contém a lógica do aplicativo, incluindo as funcionalidades de adicionar, editar e excluir itens da lista de compras.
 
 ## Próximos Passos
+- Implementar testes automatizados para a API
+- Adicionar autenticação e autorização para a API
+- Melhorar a documentação da API usando ferramentas como Swagger
 
-Caso queira aprofundar o projeto, você pode:
-
-- Implementar a persistência dos dados em um banco de dados
-- Criar uma interface gráfica de usuário (GUI) utilizando uma biblioteca como Swing ou JavaFX
-- Adicionar funcionalidades extras, como a possibilidade de marcar itens como comprados, categorizar os itens, entre outras
-
-## Contribuição
-
-Sinta-se à vontade para contribuir com o projeto, reportar problemas ou sugerir melhorias. Bom desenvolvimento!
+Qualquer dúvida ou sugestão, por favor, entre em contato!
