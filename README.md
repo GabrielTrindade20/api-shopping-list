@@ -1,4 +1,4 @@
-# Projeto de Lista de Itens
+# Projeto Shopping List
 
 ## Visão Geral
 Este projeto tem como objetivo criar uma API para gerenciar uma lista de itens. Ela permite a realização de operações básicas de criação, leitura, atualização e exclusão (CRUD) de itens.
