@@ -24,7 +24,7 @@ public class ItemEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@JsonProperty("item") 
+	
 	@Column(name = "item")
 	private String item;
 

@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,54 +16,54 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.shoppingList.ItemRequest.CreateItemRequest;
+import com.api.shoppingList.ItemRequest.UpdateItemRequest;
 import com.api.shoppingList.entities.ItemEntity;
 import com.api.shoppingList.repository.ItemRepository;
-
-
+import com.api.shoppingList.service.ItemService;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
 
 	@Autowired
 	private ItemRepository itemRepository;
-	
-	
-//	public ItemController(ItemRepository itemRepository) {
-//		this.itemRepository = itemRepository;
-//	}
-//	
-	@GetMapping("/getItems")
-	public List<ItemEntity> getAllItems() {
-		return itemRepository.findAll();
+
+	@Autowired
+	private ItemService itemService;
+
+	// function to create an item
+	@PostMapping("/create")
+	public ResponseEntity<ItemEntity> createItem(@RequestBody String name) {
+		ItemEntity createdItem = itemService.createItem(name);
+		return ResponseEntity.status(HttpStatus.CREATED).body(createdItem);
+	}
+
+	// function to get all item
+	@GetMapping("/getAllItems")
+	public ResponseEntity<List<ItemEntity>> getAllItems() {
+		List<ItemEntity> items = itemService.getAllItems();
+		return ResponseEntity.ok(items);
 	}
 	
-	@PostMapping("/registerItem")
-    public ResponseEntity<ItemEntity> createItem(@RequestBody ItemEntity item) {
-        ItemEntity savedItem = itemRepository.save(item);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedItem);
-    }
-	
-	@PutMapping("/{id}")
-	public ResponseEntity<ItemEntity> updateItem(@PathVariable Long id, @RequestBody ItemEntity item) {
-		if (!itemRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		item.setId(id);
-		ItemEntity updateItem = itemRepository.save(item);	
+	@GetMapping("/getItemById/{id}")
+	public ResponseEntity<ItemEntity> getItemById(@PathVariable long id){
+		ItemEntity idItem = itemService.getItemById(id);
+		return ResponseEntity.ok(idItem);
+	}
+
+	//function to update an item
+	@PutMapping("/update/{id}")
+	public ResponseEntity<ItemEntity> updateItem(@PathVariable Long id, @RequestBody UpdateItemRequest request) {
+		ItemEntity updateItem = itemService.updateItem(id, request.getName());
 		return ResponseEntity.ok(updateItem);
 	}
-	
-	@DeleteMapping("/{id}")
-	public ResponseEntity<ItemEntity> deleteItem(@PathVariable Long id){
-		if (!itemRepository.existsById(id)) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		itemRepository.deleteById(id);
+
+	//function to delete an item
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Void> deleteItem(@PathVariable Long id) {
+		itemService.deleteItem(id);
 		return ResponseEntity.noContent().build();
 	}
-	
 	
 }
